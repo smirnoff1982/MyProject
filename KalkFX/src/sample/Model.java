@@ -1,6 +1,6 @@
 package sample;
 
-import java.awt.*;
+
 import java.io.*;
 import java.nio.file.*;
 import java.nio.file.Files;
@@ -22,7 +22,7 @@ public class Model {
     File history = new File("history.dat");
     FileOutputStream fout;
     BufferedReader br;
-    List<String> hist;
+
 
     public void addHistory(String string) throws FileNotFoundException {
 
@@ -42,7 +42,17 @@ public class Model {
 
     public void clearHistory() {
 
-        history.delete();
+        try{
+             if(history.delete()){
+                System.out.println(history.getName() + " is deleted!");
+            }else{
+                System.out.println("Delete operation is failed.");
+            }
+        }catch(Exception e){
+
+            e.printStackTrace();
+
+        }
     }
 
     public String showHistory() throws IOException {
@@ -64,6 +74,7 @@ public class Model {
                 line = br.readLine();
 
             }
+            br.close();
             return txt;
 
 
@@ -73,5 +84,5 @@ public class Model {
 
         return txt;
 
-        }
+    }
 }
